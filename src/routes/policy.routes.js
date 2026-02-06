@@ -1,3 +1,4 @@
+const { apiError } = require('../utils/errors');
 const express = require('express');
 const router = express.Router();
 
@@ -10,7 +11,10 @@ router.get('/fixed-extensions', (req, res) => {
 });
 
 router.get('/custom-extensions', (req, res) => {
+  // 테스트용: 쿼리로 error=1 넣으면 400 던지기
+  if (req.query.error === '1') throw apiError(400, 'INVALID_REQUEST', '테스트 에러');
   res.json([]);
 });
+
 
 module.exports = router;
